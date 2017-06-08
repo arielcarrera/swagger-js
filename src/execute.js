@@ -262,7 +262,11 @@ export function applySecurities({request, securities = {}, operation = {}, spec}
           }
         }
         else if (type === 'oauth2') {
-          result.headers.authorization = `${tokenType || 'Bearer'} ${accessToken}`
+            let ttype = 'Bearer';
+            if (tokenType && 'BEARER' !== tokenType.toUpperCase()) {
+                ttype = tokenType;
+            }
+            result.headers.authorization = `${ttype} ${accessToken}`
         }
       }
     }
